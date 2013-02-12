@@ -8,3 +8,7 @@ satisfied.
 
 Hildebrand, P. H. and R. S. Sekhon, 1974: Objective determination of the noise level in Doppler Spectra. J. Appl.
 Meteor., 13, 808-811.
+
+---
+Kirk North
+E: kirk.w.north@gmail.com
