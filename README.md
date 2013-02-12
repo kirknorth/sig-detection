@@ -10,4 +10,4 @@ Hildebrand, P. H. and R. S. Sekhon, 1974: Objective determination of the noise l
 Meteor., 13, 808-811.
 
 ---
-Kirk North <kirk.w.north@gmail.com>
+Kirk North (kirk.w.north@gmail.com)
