@@ -20,7 +20,7 @@ function [P,stdP,nP,tshR2,maxSn] = noiselevelhildebrand(Sn,N,p)
 %   spectrum has not been smoothed, then p = 1.
 %
 %   For more information, please see Hildebrand and Sekhon (1974).
-%
+
 %   Copyright (C) 2013 Kirk North
 %   
 %   This program is free software: you can redistribute it and/or modify
@@ -36,17 +36,17 @@ function [P,stdP,nP,tshR2,maxSn] = noiselevelhildebrand(Sn,N,p)
 %   You should have received a copy of the GNU General Public License
 %   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-maxSn = nanmax(Sn); % maximum value in spectrum; linear units
-Sn = sort(Sn,'descend'); % linear units
-tshR2 = Sn(end); % set signal/noise threshold to lowest value in spectrum; linear units
+maxSn = nanmax(Sn);
+Sn = sort(Sn,'descend');
+tshR2 = Sn(end); % Set signal/noise threshold to lowest value in spectrum.
 for i = 1:N
-    nP = N-i+1; % current number of points used to check white noise criteria
-    P = nansum(Sn(i:end))/nP; % mean noise level for current search point; linear units
-    Q = nansum(Sn(i:end).^2/nP)-P^2;
-    R2 = P^2/(Q*p);
-    stdP = nanstd(Sn(i:end)); % standard deviation for current search point; linear units
-    if (R2 > 1) % white noise criteria has been met
-        tshR2 = Sn(i); % signal/noise threshold; linear units
+    nP = N-i+1;
+    P = nansum(Sn(i:end))/nP; % Mean noise level for current search point.
+    Q = nansum(Sn(i:end).^2/nP) - P^2;
+    R2 = P^2/(Q * p);
+    stdP = nanstd(Sn(i:end));
+    if (R2 > 1) % White noise criteria has been met.
+        tshR2 = Sn(i);
         break
     end
 end
