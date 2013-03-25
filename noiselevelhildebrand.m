@@ -38,7 +38,7 @@ function [P,stdP,nP,tshR2,maxSn] = noiselevelhildebrand(Sn,N,p)
 
 maxSn = nanmax(Sn);
 Sn = sort(Sn,'descend');
-tshR2 = Sn(end); % Set signal/noise threshold to lowest value in spectrum.
+tshR2 = Sn(end); % Sets signal/noise threshold to lowest value in spectrum.
 for i = 1:N
     nP = N-i+1;
     P = nansum(Sn(i:end))/nP; % Mean noise level for current search point.
