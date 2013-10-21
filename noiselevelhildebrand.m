@@ -42,7 +42,7 @@ tshR2 = Sn(end); % Sets signal/noise threshold to lowest value in spectrum.
 for i = 1:N
     nP = N-i+1;
     P = nansum(Sn(i:end))/nP; % Mean noise level for current search point.
-    Q = nansum(Sn(i:end).^2/nP) - P^2;
+    Q = nansum(Sn(i:end).^2/nP) - P^2; % Variance of noise level for current search point.
     R2 = P^2/(Q * p);
     stdP = nanstd(Sn(i:end));
     if (R2 > 1) % White noise criteria has been met.
