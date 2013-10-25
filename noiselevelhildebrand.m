@@ -1,18 +1,18 @@
-function [P,stdP,nP,tshR2,maxSn] = noiselevelhildebrand(Sn,N,p)
+function [P,Q,n,SnR2,maxSn] = noiselevelhildebrand(Sn,N,p)
 %NOISELEVELHILDEBRAND Determine the noise level in power spectra based 
 %on Hildebrand, P. H. and R. S. Sekhon, 1974: Objective determination of 
 %the noise level in Doppler spectra.
-%   [P,stdP,nP,tshR2,maxSn] = NOISELEVELHILDEBRAND(Sn,N,p) returns the 
-%   mean noise level P for the spectrum Sn, the standard deviation of the 
-%   spectral values used to calculate P, the number of points in the 
-%   spectrum determined to be noise nP, the signal/noise critical threshold
-%   tshR2, and the maximum value in the spectrum maxSn. 
+%   [P,Q,n,SnR2,maxSn] = NOISELEVELHILDEBRAND(Sn,N,p) returns the 
+%   mean noise level P for the spectrum Sn below R2, the variance of the 
+%   spectral values below R2, the number of points in the spectrum 
+%   below R2, the signal/noise critical threshold SnR2, and the maximum 
+%   value in the spectrum maxSn. 
 %
-%   The signal/noise threshold tshR2 is the critical value where the 
+%   The signal/noise threshold SnR2 is the critical value where the 
 %   criterion for white noise has been met, while P is the mean of all the 
 %   values in Sn below this critical value. 
 %
-%   Sn should be a vector and in linear units (e.g. mW), where P, tshR2, 
+%   Sn should be a vector and in linear units (e.g. mW), where P, SnR2, 
 %   and maxSn will then be in linear units. Sn need not be a Doppler 
 %   spectrum, but it must be a power spectrum. N is the number of 
 %   independent spectral values, or simply LENGTH(Sn). p is the number of 
@@ -38,15 +38,14 @@ function [P,stdP,nP,tshR2,maxSn] = noiselevelhildebrand(Sn,N,p)
 
 maxSn = nanmax(Sn);
 Sn = sort(Sn,'descend');
-tshR2 = Sn(end); % Sets signal/noise threshold to lowest value in spectrum.
+SnR2 = Sn(end); % Set signal/noise threshold to lowest value in spectrum.
 for i = 1:N
-    nP = N-i+1;
-    P = nansum(Sn(i:end))/nP; % Mean noise level for current search point.
-    Q = nansum(Sn(i:end).^2/nP) - P^2; % Variance of noise level for current search point.
-    R2 = P^2/(Q * p);
-    stdP = nanstd(Sn(i:end));
+    n = N - i + 1;
+    P = nansum(Sn(i:end)) / n; % Mean noise level for current iteration.
+    Q = nansum(Sn(i:end).^2 / n) - P^2; % Variance of noise level for current iteration.
+    R2 = P^2 / (Q * p);
     if (R2 > 1) % White noise criteria has been met.
-        tshR2 = Sn(i);
+        SnR2 = Sn(i);
         break
     end
 end
