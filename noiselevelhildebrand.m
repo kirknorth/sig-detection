@@ -42,7 +42,7 @@ SnR2 = Sn(end); % Set signal/noise threshold to lowest value in spectrum.
 for i = 1:N
     n = N - i + 1;
     P = nansum(Sn(i:end)) / n; % Mean noise level for current iteration.
-    Q = nansum(Sn(i:end).^2 / n) - P^2; % Variance of noise level for current iteration.
+    Q = nansum(Sn(i:end).^2) / n - P^2; % Variance of noise level for current iteration.
     R2 = P^2 / (Q * p);
     if (R2 > 1) % White noise criteria has been met.
         SnR2 = Sn(i);
