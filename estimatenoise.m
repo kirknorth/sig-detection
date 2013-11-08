@@ -1,14 +1,14 @@
-function [P,Q,n,SnR2,maxSn] = noiselevelhildebrand(Sn,N,p)
-%NOISELEVELHILDEBRAND Determine the noise level in power spectra based 
+function [P, Q, n, SnR2, maxSn] = estimatenoise(Sn, N, p)
+%ESTIMATENOISE Determine the noise level in power spectra based 
 %on Hildebrand, P. H. and R. S. Sekhon, 1974: Objective determination of 
 %the noise level in Doppler spectra.
-%   [P,Q,n,SnR2,maxSn] = NOISELEVELHILDEBRAND(Sn,N,p) returns the 
+%   [P, Q, n, SnR2, maxSn] = NOISELEVELHILDEBRAND(Sn, N, p) returns the 
 %   mean noise level P for the spectrum Sn below R2, the variance of the 
 %   spectral values below R2, the number of points in the spectrum 
-%   below R2, the signal/noise critical threshold SnR2, and the maximum 
+%   below R2, the signal-to-noise critical threshold SnR2, and the maximum 
 %   value in the spectrum maxSn. 
 %
-%   The signal/noise threshold SnR2 is the critical value where the 
+%   The signal-to-noise threshold SnR2 is the critical value where the 
 %   criterion for white noise has been met, while P is the mean of all the 
 %   values in Sn below this critical value. 
 %
@@ -38,7 +38,7 @@ function [P,Q,n,SnR2,maxSn] = noiselevelhildebrand(Sn,N,p)
 
 maxSn = nanmax(Sn);
 Sn = sort(Sn,'descend');
-SnR2 = Sn(end); % Set signal/noise threshold to lowest value in spectrum.
+SnR2 = Sn(end); % Set signal-to-noise threshold to lowest value in spectrum.
 for i = 1:N
     n = sum(isfinite(Sn(i:end)));
     P = nansum(Sn(i:end)) / n; % Mean noise level for current iteration.
