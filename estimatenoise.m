@@ -37,7 +37,7 @@ function [P, Q, n, SnR2, maxSn] = estimatenoise(Sn, N, p)
 %   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 maxSn = nanmax(Sn);
-Sn = sort(Sn,'descend');
+Sn = sort(Sn, 'descend');
 SnR2 = Sn(end); % Set signal-to-noise threshold to lowest value in spectrum.
 for i = 1:N
     n = sum(isfinite(Sn(i:end)));
