@@ -2,8 +2,8 @@ function [P, Q, n, SnR2, maxSn] = estimatenoise(Sn, N, p)
 %ESTIMATENOISE Determine the noise level in power spectra based 
 %on Hildebrand, P. H. and R. S. Sekhon, 1974: Objective determination of 
 %the noise level in Doppler spectra.
-%   [P, Q, n, SnR2, maxSn] = NOISELEVELHILDEBRAND(Sn, N, p) returns the 
-%   mean noise level P for the spectrum Sn below R2, the variance of the 
+%   [P, Q, n, SnR2, maxSn] = ESTIMATENOISE(Sn, N, p) returns the mean
+%   noise level P for the spectrum Sn below R2, the variance of the 
 %   spectral values below R2, the number of points in the spectrum 
 %   below R2, the signal-to-noise critical threshold SnR2, and the maximum 
 %   value in the spectrum maxSn. 
